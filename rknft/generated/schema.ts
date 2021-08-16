@@ -85,4 +85,330 @@ export class NFTData extends Entity {
       this.set("tokenURI", Value.fromString(value as string));
     }
   }
+
+  get orders(): Array<string> | null {
+    let value = this.get("orders");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set orders(value: Array<string> | null) {
+    if (value === null) {
+      this.unset("orders");
+    } else {
+      this.set("orders", Value.fromStringArray(value as Array<string>));
+    }
+  }
+
+  get activeOrder(): string | null {
+    let value = this.get("activeOrder");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set activeOrder(value: string | null) {
+    if (value === null) {
+      this.unset("activeOrder");
+    } else {
+      this.set("activeOrder", Value.fromString(value as string));
+    }
+  }
+
+  get name(): string | null {
+    let value = this.get("name");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set name(value: string | null) {
+    if (value === null) {
+      this.unset("name");
+    } else {
+      this.set("name", Value.fromString(value as string));
+    }
+  }
+
+  get image(): string | null {
+    let value = this.get("image");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set image(value: string | null) {
+    if (value === null) {
+      this.unset("image");
+    } else {
+      this.set("image", Value.fromString(value as string));
+    }
+  }
+
+  get createdAt(): BigInt {
+    let value = this.get("createdAt");
+    return value.toBigInt();
+  }
+
+  set createdAt(value: BigInt) {
+    this.set("createdAt", Value.fromBigInt(value));
+  }
+
+  get updatedAt(): BigInt {
+    let value = this.get("updatedAt");
+    return value.toBigInt();
+  }
+
+  set updatedAt(value: BigInt) {
+    this.set("updatedAt", Value.fromBigInt(value));
+  }
+
+  get searchOrderStatus(): string | null {
+    let value = this.get("searchOrderStatus");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set searchOrderStatus(value: string | null) {
+    if (value === null) {
+      this.unset("searchOrderStatus");
+    } else {
+      this.set("searchOrderStatus", Value.fromString(value as string));
+    }
+  }
+
+  get searchOrderPrice(): BigInt | null {
+    let value = this.get("searchOrderPrice");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set searchOrderPrice(value: BigInt | null) {
+    if (value === null) {
+      this.unset("searchOrderPrice");
+    } else {
+      this.set("searchOrderPrice", Value.fromBigInt(value as BigInt));
+    }
+  }
+
+  get searchOrderExpiresAt(): BigInt | null {
+    let value = this.get("searchOrderExpiresAt");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set searchOrderExpiresAt(value: BigInt | null) {
+    if (value === null) {
+      this.unset("searchOrderExpiresAt");
+    } else {
+      this.set("searchOrderExpiresAt", Value.fromBigInt(value as BigInt));
+    }
+  }
+
+  get searchOrderCreatedAt(): BigInt | null {
+    let value = this.get("searchOrderCreatedAt");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set searchOrderCreatedAt(value: BigInt | null) {
+    if (value === null) {
+      this.unset("searchOrderCreatedAt");
+    } else {
+      this.set("searchOrderCreatedAt", Value.fromBigInt(value as BigInt));
+    }
+  }
+
+  get searchText(): string | null {
+    let value = this.get("searchText");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set searchText(value: string | null) {
+    if (value === null) {
+      this.unset("searchText");
+    } else {
+      this.set("searchText", Value.fromString(value as string));
+    }
+  }
+}
+
+export class Order extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save Order entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save Order entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("Order", id.toString(), this);
+  }
+
+  static load(id: string): Order | null {
+    return store.get("Order", id) as Order | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get nft(): string | null {
+    let value = this.get("nft");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set nft(value: string | null) {
+    if (value === null) {
+      this.unset("nft");
+    } else {
+      this.set("nft", Value.fromString(value as string));
+    }
+  }
+
+  get nftAddress(): string {
+    let value = this.get("nftAddress");
+    return value.toString();
+  }
+
+  set nftAddress(value: string) {
+    this.set("nftAddress", Value.fromString(value));
+  }
+
+  get tokenId(): BigInt {
+    let value = this.get("tokenId");
+    return value.toBigInt();
+  }
+
+  set tokenId(value: BigInt) {
+    this.set("tokenId", Value.fromBigInt(value));
+  }
+
+  get txHash(): Bytes {
+    let value = this.get("txHash");
+    return value.toBytes();
+  }
+
+  set txHash(value: Bytes) {
+    this.set("txHash", Value.fromBytes(value));
+  }
+
+  get owner(): Bytes {
+    let value = this.get("owner");
+    return value.toBytes();
+  }
+
+  set owner(value: Bytes) {
+    this.set("owner", Value.fromBytes(value));
+  }
+
+  get buyer(): Bytes | null {
+    let value = this.get("buyer");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set buyer(value: Bytes | null) {
+    if (value === null) {
+      this.unset("buyer");
+    } else {
+      this.set("buyer", Value.fromBytes(value as Bytes));
+    }
+  }
+
+  get price(): BigInt {
+    let value = this.get("price");
+    return value.toBigInt();
+  }
+
+  set price(value: BigInt) {
+    this.set("price", Value.fromBigInt(value));
+  }
+
+  get status(): string {
+    let value = this.get("status");
+    return value.toString();
+  }
+
+  set status(value: string) {
+    this.set("status", Value.fromString(value));
+  }
+
+  get blockNumber(): BigInt {
+    let value = this.get("blockNumber");
+    return value.toBigInt();
+  }
+
+  set blockNumber(value: BigInt) {
+    this.set("blockNumber", Value.fromBigInt(value));
+  }
+
+  get expiresAt(): BigInt {
+    let value = this.get("expiresAt");
+    return value.toBigInt();
+  }
+
+  set expiresAt(value: BigInt) {
+    this.set("expiresAt", Value.fromBigInt(value));
+  }
+
+  get createdAt(): BigInt {
+    let value = this.get("createdAt");
+    return value.toBigInt();
+  }
+
+  set createdAt(value: BigInt) {
+    this.set("createdAt", Value.fromBigInt(value));
+  }
+
+  get updatedAt(): BigInt {
+    let value = this.get("updatedAt");
+    return value.toBigInt();
+  }
+
+  set updatedAt(value: BigInt) {
+    this.set("updatedAt", Value.fromBigInt(value));
+  }
 }

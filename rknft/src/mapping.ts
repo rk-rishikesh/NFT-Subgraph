@@ -7,6 +7,12 @@ import {
   ApprovalForAll
 } from "../generated/NFT/NFT"
 import { NFTData } from "../generated/schema"
+import { createAccount } from './wallet'
+import {
+  isMint,
+  cancelActiveOrder,
+  clearNFTOrderProperties
+} from './nft'
 
 export function handleNFTRegistered(event: NFTRegistered): void {
   // Entities can be loaded from the store using a string ID; this ID
@@ -59,6 +65,42 @@ export function handleNFTRegistered(event: NFTRegistered): void {
 }
 
 export function handleTransfer(event: Transfer): void {
+  if (event.params._tokenId.toString() == '') {
+    return
+  }
+  
+  let entity = NFTData.load(event.transaction.from.toHex())
+
+  // Entities only exist after they have been saved to the store;
+  // `null` checks allow to create entities on demand
+  if (entity == null) {
+    entity = new NFTData(event.transaction.from.toHex())
+  }
+
+  entity._by = event.params._to
+  entity._tokenId = event.params._tokenId
+  entity.nftAddress = event.address.toHexString()
+  let contract = NFT.bind(event.address)
+  entity.tokenURI = contract.tokenURI(entity._tokenId)
+  entity.updatedAt = event.block.timestamp
+
+  if (isMint(event)) {
+    entity.createdAt = event.block.timestamp
+
+    entity.searchText = ''
+
+    // let metric = buildCountFromNFT(nft)
+    // metric.save()
+  } else {
+    let oldNFT = NFTData.load(event.transaction.from.toHex())
+    if (cancelActiveOrder(oldNFT!, event.block.timestamp)) {
+      entity = clearNFTOrderProperties(entity!)
+    }
+  }
+
+  createAccount(event.params._to)
+
+  entity.save()
   
 }
 
