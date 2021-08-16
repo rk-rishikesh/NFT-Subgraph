@@ -1,0 +1,7 @@
+type NFTData @entity {
+  id: ID!
+  _tokenId: BigInt!
+  nftAddress: String!
+  _by: Bytes! # address
+  tokenURI: String
+}
