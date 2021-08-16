@@ -2,7 +2,7 @@ type NFTData @entity {
   id: ID!
   _tokenId: BigInt!
   nftAddress: String!
-  _by: Bytes! # address
+  _by: Account! # address
   tokenURI: String
 
   orders: [Order!] @derivedFrom(field: "nft") # History of all orders. Should only ever be ONE open order. all others must be cancelled or sold
@@ -43,4 +43,10 @@ enum OrderStatus @entity {
   open
   sold
   cancelled
+}
+
+type Account @entity {
+  id: ID! # ETH addr
+  address: Bytes!
+  nfts: [NFTData!] @derivedFrom(field: "_by")
 }

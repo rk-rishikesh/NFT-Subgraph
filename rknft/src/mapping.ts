@@ -26,7 +26,7 @@ export function handleNFTRegistered(event: NFTRegistered): void {
   }
 
   // Entity fields can be set based on event parameters
-  entity._by = event.params._by
+  entity._by = event.params._by.toHex()
   entity._tokenId = event.params._tokenId
   entity.nftAddress = event.address.toHexString()
   let contract = NFT.bind(event.address)
@@ -77,7 +77,7 @@ export function handleTransfer(event: Transfer): void {
     entity = new NFTData(event.transaction.from.toHex())
   }
 
-  entity._by = event.params._to
+  entity._by = event.params._to.toHex()
   entity._tokenId = event.params._tokenId
   entity.nftAddress = event.address.toHexString()
   let contract = NFT.bind(event.address)

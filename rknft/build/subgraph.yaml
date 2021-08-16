@@ -8,6 +8,7 @@ dataSources:
     source:
       address: 240a4ad8444a263cb854063364412fd7fdc16ac2
       abi: NFT
+      startBlock: 22273585
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -19,7 +20,7 @@ dataSources:
         - ApprovalForAll
       abis:
         - name: NFT
-          file: NFT\abis\NFT.json
+          file: NFT/abis/NFT.json
       eventHandlers:
         - event: NFTRegistered(address,uint256)
           handler: handleNFTRegistered
@@ -29,4 +30,4 @@ dataSources:
           handler: handleApproval
         - event: ApprovalForAll(indexed address,indexed address,bool)
           handler: handleApprovalForAll
-      file: NFT\NFT.wasm
+      file: NFT/NFT.wasm

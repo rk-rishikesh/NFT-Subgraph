@@ -60,13 +60,13 @@ export class NFTData extends Entity {
     this.set("nftAddress", Value.fromString(value));
   }
 
-  get _by(): Bytes {
+  get _by(): string {
     let value = this.get("_by");
-    return value.toBytes();
+    return value.toString();
   }
 
-  set _by(value: Bytes) {
-    this.set("_by", Value.fromBytes(value));
+  set _by(value: string) {
+    this.set("_by", Value.fromString(value));
   }
 
   get tokenURI(): string | null {
@@ -410,5 +410,62 @@ export class Order extends Entity {
 
   set updatedAt(value: BigInt) {
     this.set("updatedAt", Value.fromBigInt(value));
+  }
+}
+
+export class Account extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save Account entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save Account entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("Account", id.toString(), this);
+  }
+
+  static load(id: string): Account | null {
+    return store.get("Account", id) as Account | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get address(): Bytes {
+    let value = this.get("address");
+    return value.toBytes();
+  }
+
+  set address(value: Bytes) {
+    this.set("address", Value.fromBytes(value));
+  }
+
+  get nfts(): Array<string> | null {
+    let value = this.get("nfts");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set nfts(value: Array<string> | null) {
+    if (value === null) {
+      this.unset("nfts");
+    } else {
+      this.set("nfts", Value.fromStringArray(value as Array<string>));
+    }
   }
 }
