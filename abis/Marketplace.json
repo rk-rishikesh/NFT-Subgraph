@@ -3,6 +3,39 @@
 		"constant": false,
 		"inputs": [
 			{
+				"name": "_ownerCutPerMillion",
+				"type": "uint256"
+			}
+		],
+		"name": "setOwnerCutPerMillion",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "price",
+				"type": "uint256"
+			}
+		],
+		"name": "getSaleShareAmount",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
 				"name": "nftAddress",
 				"type": "address"
 			},
@@ -44,6 +77,34 @@
 		"type": "function"
 	},
 	{
+		"constant": true,
+		"inputs": [],
+		"name": "ownerCutPerMillion",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "publicationFeeInWei",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"constant": false,
 		"inputs": [
 			{
@@ -69,20 +130,6 @@
 		"constant": false,
 		"inputs": [
 			{
-				"name": "_ownerCutPerMillion",
-				"type": "uint256"
-			}
-		],
-		"name": "setOwnerCutPerMillion",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
 				"name": "_publicationFee",
 				"type": "uint256"
 			}
@@ -91,6 +138,45 @@
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "orderByAssetId",
+		"outputs": [
+			{
+				"name": "id",
+				"type": "bytes32"
+			},
+			{
+				"name": "seller",
+				"type": "address"
+			},
+			{
+				"name": "nftAddress",
+				"type": "address"
+			},
+			{
+				"name": "price",
+				"type": "uint256"
+			},
+			{
+				"name": "expiresAt",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -232,91 +318,5 @@
 		],
 		"name": "ChangedOwnerCutPerMillion",
 		"type": "event"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "price",
-				"type": "uint256"
-			}
-		],
-		"name": "getSaleShareAmount",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "address"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "orderByAssetId",
-		"outputs": [
-			{
-				"name": "id",
-				"type": "bytes32"
-			},
-			{
-				"name": "seller",
-				"type": "address"
-			},
-			{
-				"name": "nftAddress",
-				"type": "address"
-			},
-			{
-				"name": "price",
-				"type": "uint256"
-			},
-			{
-				"name": "expiresAt",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "ownerCutPerMillion",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "publicationFeeInWei",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
 	}
 ]
