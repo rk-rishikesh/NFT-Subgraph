@@ -23,6 +23,7 @@ export function handleNFTRegistered(event: NFTRegistered): void {
     event.address.toHexString(),
     event.params._tokenId.toString()
   )
+  
 
   let entity = NFTData.load(id)
 
