@@ -12,6 +12,13 @@ export function isMint(event: Transfer): boolean {
   return event.params._from.toHexString() == '0x0000000000000000000000000000000000000000'
 }
 
+export function getNFTId(
+  contractAddress: string,
+  tokenId: string
+): string {
+  return contractAddress + '-' + tokenId
+}
+
 export function getTokenURI(event: Transfer): string {
   let erc721 = NFT.bind(event.address)
   let tokenURICallResult = erc721.try_tokenURI(event.params._tokenId)

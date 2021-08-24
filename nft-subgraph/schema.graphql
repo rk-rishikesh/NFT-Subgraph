@@ -32,7 +32,7 @@ type Order @entity {
   owner: Bytes!
   buyer: Bytes
   price: BigInt!
-  status: OrderStatus!
+  status: OrderStatus
   blockNumber: BigInt!
   expiresAt: BigInt!
   createdAt: BigInt!
