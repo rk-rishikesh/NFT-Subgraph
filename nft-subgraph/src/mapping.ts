@@ -19,18 +19,12 @@ export function handleNFTRegistered(event: NFTRegistered): void {
   // Entities can be loaded from the store using a string ID; this ID
   // needs to be unique across all entities of the same type
 
-  let id = getNFTId(
-    event.address.toHexString(),
-    event.params._tokenId.toString()
-  )
-  
-
-  let entity = NFTData.load(id)
+  let entity = NFTData.load(event.address.toHexString() + '-' + event.params._tokenId.toString())
 
   // Entities only exist after they have been saved to the store;
   // `null` checks allow to create entities on demand
   if (entity == null) {
-    entity = new NFTData(id)
+    entity = new NFTData(event.address.toHexString() + '-' + event.params._tokenId.toString())
   }
 
   // Entity fields can be set based on event parameters
@@ -77,12 +71,12 @@ export function handleTransfer(event: Transfer): void {
     return
   }
   
-  let entity = NFTData.load(event.transaction.from.toHex())
+  let entity = NFTData.load(event.address.toHexString() + '-' + event.params._tokenId.toString())
 
   // Entities only exist after they have been saved to the store;
   // `null` checks allow to create entities on demand
   if (entity == null) {
-    entity = new NFTData(event.transaction.from.toHex())
+    entity = new NFTData(event.address.toHexString() + '-' + event.params._tokenId.toString())
   }
 
   entity._by = event.params._to.toHex()
